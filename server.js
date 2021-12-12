@@ -38,33 +38,13 @@ io.on('connection', (socket) => {
     console.log('Socket ' + socket.id + ' has left');
     const leavingUser = users.find((user) => user.id == socket.id);
     if (leavingUser) {
-      console.log(leavingUser.name);
-      console.log(users);
-
       socket.broadcast.emit('leavingUser', {
         author: 'Chat Bot',
         content: `${leavingUser.name} has left the conversation! `,
       });
-
       users = users.filter((user) => user.id !== socket.id);
-      console.log(users);
     }
   });
 
-  // socket.on('disconnect', () => {
-  //   console.log('Oh, socket ' + socket.id + ' has left');
-
-  //   const leavingUser = users.find((user) => user.id == socket.id);
-  //   console.log(leavingUser, users);
-  //   // console.log('leavingUser', leavingUser.name);
-  //   // const leavingUserIndex = users.indexOf(leavingUser);
-  //   users = users.filter((user) => user.id !== socket.id);
-  //   socket.broadcast.emit('leavingUser', {
-  //     author: 'Chat Bot',
-  //     content: `${leavingUser.name} has left the conversation... :(`,
-  //   });
-  //   // users.splice(leavingUserIndex);
-  //   console.log('users', users);
-  // });
   console.log("I've added a listener on message and disconnect events \n");
 });
