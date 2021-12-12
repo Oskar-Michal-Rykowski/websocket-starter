@@ -78,6 +78,12 @@ p {
   align-items: flex-end;
 }
 
+.message--chat-bot {
+  text-align: left;
+  font-style: italic;
+  font-size: 15px;
+}
+
 .message--received {
   animation: fadeIn;
   animation-duration: 3s;
@@ -98,6 +104,10 @@ p {
   color: #fff;
   font-size: 0.9rem;
   max-width: 200px;
+}
+
+.message__chat-bot {
+  background: none;
 }
 
 .message--self .message__content {

@@ -1,7 +1,8 @@
 const socket = io();
 
 socket.on('message', ({ author, content }) => addMessage(author, content));
-// socket.on('join', ({ name, id }) => addMessage(name, id));
+socket.on('newUser', ({ author, content }) => addMessage(author, content));
+socket.on('leavingUser', ({ author, content }) => addMessage(author, content));
 
 const loginForm = document.getElementById('welcome-form');
 const messagesSection = document.getElementById('messages-section');
@@ -30,10 +31,14 @@ function addMessage(author, content) {
   message.classList.add('message--received');
   if (author === userName) {
     message.classList.add('message--self');
+  } else if (author === 'Chat Bot') {
+    message.classList.add('message--chat-bot');
   }
   message.innerHTML = `<h3 class="message__author">${
     userName === author ? 'You' : author
-  }</h3><div class="message__content">${content}</div>`;
+  }</h3><div class="${
+    author === 'Chat Bot' ? 'message__chat-bot' : 'message__content'
+  }">${content}</div>`;
   messagesList.appendChild(message);
 }
 
