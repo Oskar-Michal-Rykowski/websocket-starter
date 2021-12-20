@@ -5,7 +5,7 @@ const socket = require('socket.io');
 const app = express();
 
 const messages = [];
-let users = [];
+const users = [];
 
 app.use(express.static(path.join(__dirname, '/client')));
 
@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     console.log('Socket ' + socket.id + ' has left');
-    const leavingUser = users.find((user) => user.id == socket.id);
+    const leavingUser = users.find((user) => user.id === socket.id);
     if (leavingUser) {
       socket.broadcast.emit('leavingUser', {
         author: 'Chat Bot',
